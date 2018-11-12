@@ -1,4 +1,7 @@
+from utils import *
+
 import argparse
+from glob import glob
 from ipdb import set_trace as debug
 
 
@@ -25,7 +28,13 @@ def configure(config):
 
 def extract_data(config):
     """Extract data from the SD card."""
-    pass
+
+    # Find all collections on the SD card.
+    collections = find_all_collections(config.path_to_card)
+    collection_objects = []
+    for path_to_collection in collections:
+        collection_objects.append(Collection(path_to_collection))
+    return collection_objects
 
 
 if __name__ == "__main__":
@@ -57,7 +66,7 @@ if __name__ == "__main__":
     # Extract arguments from command line.
     config = Struct()
     args = parser.parse_args()
-    config.path_to_card = args.path
+    config.path_to_card = args.path[0]
     config.destination = args.destination
     config.do_config = args.config
     config.channels = args.channels
@@ -67,4 +76,4 @@ if __name__ == "__main__":
     if config.do_config:
         configure(config)
     elif config.extract:
-        extract_data(config)
+        collections = extract_data(config)
