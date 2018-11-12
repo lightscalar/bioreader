@@ -13,25 +13,31 @@ To ensure these are available, run,
 pip install -r requirements.txt
 ```
 
-# Configuring an SD card
+# Resetting an SD card
 
-Before use in a Biomontor device, the SD card must be configured. At the command line one 
-simply calls the script and passes in the 
+Before use in a Biomontor device, the SD card must be configured. This can be done using the following command:
 
 ```unix
-python bioreader.py /path/to/sd/card --config
+python bioreader.py /path/to/sd/card --reset
 ```
 
-Please note that this will *erase all data on the SD card*, and is not reversible. You will
-be asked if you **really** want to do this to prevent accidental data loss.
+or,
+
+```unix
+python bioreader.py /path/to/sd/card -r
+```
+
+Please note that this will *erase all data on the SD card*, and is not
+reversible. You will be asked to confirm you **really** want to do this to
+avoid accidental data loss.
 
 By default, the Biomonitor will record four channels of data — PZT Ring (0),
 PPG (1), Bioimpedance (2), and ECG (3). In many cases, researchers will want to
 collect only a subset of the channels. To do this, simply specify the channels
-using the `--channels` flag:
+using the `--channels` flag during a card reset:
 
 ```unix
-python bioreader.py /path/to/sd/card --config --channels 0 1
+python bioreader.py /path/to/sd/card --reset --channels 0 1
 ```
 
 In this example, the SD card will be configured so that only the PZT ring and
@@ -46,10 +52,13 @@ accomplished using the `--extract` command. For example,
 python bioreader.py /path/to/sd/card --extract
 ```
 
-This will convert data from the Biomonitor's format into CSV files. By default,
-the script will extract the data into CSV files stored on the SD card in a
-root-level folder called `/ARXIV`. To specify an alternate location, you may
-specify the file destination:
+This will convert data from the Biomonitor's `.dat` format into easily readable
+CSV files. The `.dat` files will not be deleted from the card during this
+process. Only a reset command will remove data from the SD card.
+
+By default, the script will extract the data into CSV files stored on
+the SD card in a root-level folder called `/ARXIV`. To specify an alternate
+location, you may specify a file destination:
 
 ```unix
 python bioreader.py /path/to/sd/card --extract --destination /path/to/csv/files
