@@ -23,7 +23,7 @@ python bioreader.py /path/to/sd/card --config
 ```
 
 Please note that this will *erase all data on the SD card*, and is not reversible. You will
-be asked if you really want to do this to prevent accidental data loss.
+be asked if you **really** want to do this to prevent accidental data loss.
 
 By default, the Biomonitor will record four channels of data — PZT Ring (0),
 PPG (1), Bioimpedance (2), and ECG (3). In many cases, researchers will want to
@@ -52,5 +52,5 @@ root-level folder called `/ARXIV`. To specify an alternate location, you may
 specify the file destination:
 
 ```unix
-python bioreader.py /path/to/sd/card --extract --destination /path/to/files
+python bioreader.py /path/to/sd/card --extract --destination /path/to/csv/files
 ```
