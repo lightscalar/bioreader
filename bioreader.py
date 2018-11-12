@@ -23,6 +23,11 @@ def configure(config):
         pass
 
 
+def extract_data(config):
+    """Extract data from the SD card."""
+    pass
+
+
 if __name__ == "__main__":
 
     # Check for arguments.
@@ -38,6 +43,13 @@ if __name__ == "__main__":
         type=str,
         help="The location of the target SD card",
     )
+    parser.add_argument(
+        "-d",
+        "--destination",
+        default="__SD_LOCAL__",
+        type=str,
+        help="Where should we store the extracted data?",
+    )
     parser.add_argument("-ch", "--channels", default=[0, 1, 2, 3], nargs="+", type=int)
     parser.add_argument("-c", "--config", action="store_true")
     parser.add_argument("-e", "--extract", action="store_true")
@@ -46,6 +58,7 @@ if __name__ == "__main__":
     config = Struct()
     args = parser.parse_args()
     config.path_to_card = args.path
+    config.destination = args.destination
     config.do_config = args.config
     config.channels = args.channels
     config.extract = args.extract
@@ -54,4 +67,4 @@ if __name__ == "__main__":
     if config.do_config:
         configure(config)
     elif config.extract:
-        extract(config)
+        extract_data(config)
