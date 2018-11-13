@@ -13,7 +13,7 @@ party libraries.  To ensure these are available, run,
 pip install -r requirements.txt
 ```
 
-# Resetting an SD card
+## Resetting an SD card
 
 Before use in a Biomontor device, the SD card must be configured. This can be
 done using the following command:
