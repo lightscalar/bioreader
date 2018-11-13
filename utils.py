@@ -141,7 +141,7 @@ class Collection:
         print("> Processing and filtering data.")
         self.data_frames = {}
         for c in tqdm(self.channels):
-            if len(self.data[c][fields[0]])==0:
+            if len(self.data[c][fields[0]]) == 0:
                 continue
             # Create a dictionary to hold all the data.
             for f in fields:
@@ -154,9 +154,13 @@ class Collection:
                 self.data[c][fields[3]] = (
                     self.data[c][fields[3]] - np.median(self.data[c][fields[3]])
                 ) / (self.data[c][fields[3]].std())
+                self.data[c][fields[3]] *= -1
             # Filter raw signal data.
             self.data[c][fields[4]], _ = lowpass(
-                self.data[c][fields[1]], self.data[c][fields[3]], freq_cutoff=10
+                self.data[c][fields[1]],  # time
+                self.data[c][fields[3]],  # signal
+                transition_band=5,
+                freq_cutoff=10,
             )
             # Generate pretty date/time stamps for data.
             self.data[c][fields[2]] = np.array(
@@ -174,7 +178,7 @@ class Collection:
             os.makedirs(location)
         for c in tqdm(self.channels):
             if c not in self.data_frames.keys():
-                continue # channel not collected
+                continue  # channel not collected
             else:
                 filename = f"{location}/{self.channel_names[c]}.csv"
                 self.data_frames[c].to_csv(filename)

@@ -1,14 +1,15 @@
 import numpy as np
+from ipdb import set_trace as debug
 
 
-def lowpass(t, y, filter_order=5, freq_cutoff=10):
+def lowpass(t, y, transition_band=5, freq_cutoff=10):
     """Low-pass sinc filter."""
 
     # Determine the sampling rate of the supplied data.
     fs = 1 / np.median(np.diff(t))
     nyquist = 0.5 * fs
     fc = freq_cutoff / nyquist
-    b = 0.1
+    b = transition_band / nyquist
 
     N = int(np.ceil(4 / b))
     if not N % 2:
@@ -37,9 +38,8 @@ def lowpass(t, y, filter_order=5, freq_cutoff=10):
 
     # Filter the signal.
     y_filt = np.convolve(y, h)
-    lag = int((len(h) - 1 )/2)
+    lag = int((len(h) - 1) / 2)
     y_filt = y_filt[lag:-lag]
-
 
     # Keep output consistent with scipy-based filter.
     return y_filt, h
@@ -54,12 +54,8 @@ if __name__ == "__main__":
     y_filt, h = lowpass(t, y, 15, freq_cutoff=5)
     # y_filt_2, _ = lowpass(t, y, 5, freq_cutoff=5)
 
-
     ion()
-    close('all')
+    close("all")
     plot(t, y)
     plot(t, y_filt)
     # plot(t, y_filt_2)
-
-
-
