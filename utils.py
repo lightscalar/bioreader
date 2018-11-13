@@ -1,5 +1,5 @@
 """Utilities for BIOREADER."""
-from filters import *
+from sinc_filters import *
 
 from datetime import datetime
 from glob import glob
