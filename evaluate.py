@@ -7,14 +7,15 @@ import pylab as plt
 import seaborn as sns
 
 
-dirs = glob("tmp/*")
+dirs = glob("today_card/ARXIV/*")
 pzt = pd.read_csv(f"{dirs[0]}/PZT.csv")
 t = pzt["Corrected Timestamps (seconds)"]
-v_ = pzt["Low-pass Filtered Signal (10 Hz)"]
+v = pzt["Low-pass Filtered Signal (10 Hz)"]
 # v_ = np.array(pzt["Raw Signal"])
 
-# v_ = (v - np.median(v)) / v.std()
-# v_[np.abs(v_) > 5 * v.std()] = 0
+v_ = (v - np.median(v)) / v.std()
+v_[np.abs(v_) > 5 * v.std()] = 0
+v_ *= -1
 
 plt.ion()
 plt.close("all")

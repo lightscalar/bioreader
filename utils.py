@@ -141,6 +141,8 @@ class Collection:
         print("> Processing and filtering data.")
         self.data_frames = {}
         for c in tqdm(self.channels):
+            if len(self.data[c][fields[0]])==0:
+                continue
             # Create a dictionary to hold all the data.
             for f in fields:
                 self.data[c][f] = np.array(self.data[c][f])
@@ -171,5 +173,8 @@ class Collection:
         if not os.path.isdir(location):
             os.makedirs(location)
         for c in tqdm(self.channels):
-            filename = f"{location}/{self.channel_names[c]}.csv"
-            self.data_frames[c].to_csv(filename)
+            if c not in self.data_frames.keys():
+                continue # channel not collected
+            else:
+                filename = f"{location}/{self.channel_names[c]}.csv"
+                self.data_frames[c].to_csv(filename)
