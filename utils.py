@@ -84,13 +84,17 @@ def find_all_collections(path_to_card):
 class Collection:
     """Defines a single time aligned collection."""
 
-    def __init__(self, path_to_collection, path_to_csv_files):
+    def __init__(self, path_to_card, path_to_collection, path_to_csv_files):
         """Find all files present in dated folder."""
         self.errors = []
         valid_folder = valid_date_time_folder(path_to_collection)
         self.channels = [0, 1, 2, 3]
         self.channel_names = ["PZT", "PPG", "BIOZ", "ECG"]
-        self.path_to_csv_files = path_to_csv_files
+        self.path_to_card = path_to_card
+        if path_to_csv_files == "__SD_LOCAL__":
+            self.path_to_csv_files = f"{path_to_card}/ARXIV"
+        else:
+            self.path_to_csv_files = path_to_csv_files
         if not valid_folder:
             self.errors.append("Folder name is not in the specified date/time format.")
         else:

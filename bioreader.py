@@ -77,7 +77,9 @@ def extract_data(config):
     collections = find_all_collections(config.path_to_card)
     collection_objects = []
     for path_to_collection in collections:
-        collection_objects.append(Collection(path_to_collection, config.destination))
+        collection_objects.append(
+            Collection(config.path_to_card, path_to_collection, config.destination)
+        )
     return collection_objects
 
 
