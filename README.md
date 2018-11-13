@@ -3,7 +3,7 @@
  `bioreader.py` is a script for configuring the Biomonitor SD cards as well as
  extracting stored data.
 
-# Requirements
+## Requirements
 
 The `bioreader.py` script was written and tested in Python 3.7.1, though it
 should be compatible with Python 3.6+. The script relies on a number of third
@@ -44,7 +44,7 @@ python bioreader.py /path/to/sd/card --reset --channels 0 1
 In this example, the SD card will be configured so that only the PZT ring and
 the PPG channel will be recorded.
 
-# Extracting data
+## Extracting data
 
 After data has been collected, you'll want to access to it. This is
 accomplished using the `--extract` command. For example,
@@ -64,3 +64,32 @@ location, you may specify a file destination on your computer:
 ```unix
 python bioreader.py /path/to/sd/card --extract --destination /path/to/csv/files
 ```
+
+## Help
+
+To see all available options, ask for help:
+
+```unix
+$~/dev/bioreader> python bioreader.py -h
+usage: bioreader.py [-h] [-m [MINUTES]] [-d DESTINATION]
+                    [-c CHANNELS [CHANNELS ...]] [-r] [-e]
+                    path [path ...]
+
+Extract data from and configure Biomonitor SD cards.
+
+positional arguments:
+  path                  The location of the target SD card
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -m [MINUTES], --minutes [MINUTES]
+                        Maximum duration of recording session, in minutes
+  -d DESTINATION, --destination DESTINATION
+                        Where should we store the extracted CSV files?
+  -c CHANNELS [CHANNELS ...], --channels CHANNELS [CHANNELS ...]
+                        Specify the channels we should record (0—PVDF; 1-PPG;
+                        2—BIOZ; 3—ECG).
+  -r, --reset           Erase all data on the SD card and write a new
+                        configuration file.
+  -e, --extract         Extract data from the SD card and produce CSV files.
+  ```

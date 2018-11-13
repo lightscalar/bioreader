@@ -99,22 +99,40 @@ if __name__ == "__main__":
         help="The location of the target SD card",
     )
     parser.add_argument(
-        "minutes",
+        "-m",
+        "--minutes",
         nargs="?",
         default=8 * 60,
         type=int,
-        help="Maximum length or recording session, in minutes",
+        help="Maximum duration of recording session, in minutes",
     )
     parser.add_argument(
         "-d",
         "--destination",
         default="__SD_LOCAL__",
         type=str,
-        help="Where should we store the extracted data?",
+        help="Where should we store the extracted CSV files?",
     )
-    parser.add_argument("-c", "--channels", default=[0, 1, 2, 3], nargs="+", type=int)
-    parser.add_argument("-r", "--reset", action="store_true")
-    parser.add_argument("-e", "--extract", action="store_true")
+    parser.add_argument(
+        "-c",
+        "--channels",
+        default=[0, 1, 2, 3],
+        nargs="+",
+        type=int,
+        help="Specify the channels we should record (0—PVDF; 1-PPG; 2—BIOZ; 3—ECG)",
+    )
+    parser.add_argument(
+        "-r",
+        "--reset",
+        action="store_true",
+        help="Erase all data on the SD card and write a new configuration file.",
+    )
+    parser.add_argument(
+        "-e",
+        "--extract",
+        action="store_true",
+        help="Extract data from the SD card and produce CSV files.",
+    )
 
     # Extract arguments from command line.
     config = Struct()
