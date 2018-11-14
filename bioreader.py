@@ -7,7 +7,10 @@ import os
 import shutil
 
 
-def are_you_sure():
+def are_you_sure(override):
+    '''Ask the user if they really want to proceed.'''
+    if override:
+        return true
     ays = input(
         "Are you sure you want to reset this card? All data will be erased? (Y/N) "
     )
@@ -60,9 +63,9 @@ def configure_card(config):
     file_object.close()
 
 
-def reset(config):
+def reset(config, override=False):
     """Configure an SD card for use in the Biomonitor"""
-    if not are_you_sure():
+    if not are_you_sure(override):
         print("Okay. Not doing anything.")
         return
     else:
