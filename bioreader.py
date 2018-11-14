@@ -10,7 +10,7 @@ import shutil
 def are_you_sure(override):
     '''Ask the user if they really want to proceed.'''
     if override:
-        return true
+        return True
     ays = input(
         "Are you sure you want to reset this card? All data will be erased? (Y/N) "
     )
