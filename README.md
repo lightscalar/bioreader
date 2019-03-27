@@ -65,6 +65,19 @@ location, you may specify a file destination on your computer:
 python bioreader.py /path/to/sd/card --extract --destination /path/to/csv/files
 ```
 
+## Reading Annotations
+
+You can process raw annotation data into a readable CSV file using the
+`read_annotations.py` script. Simply call,
+
+`unix
+> python read_annotations path/to/annotation/file -d path/to/destination/csv
+`
+
+By default, the script will attempt to write the CSV file back to the
+`/Volumes/ANNOTATIONS` USB stick. The annotations CSV file records the board
+id, note content, timestamp, and datetime string.
+
 ## Help
 
 To see all available options, ask for help:
