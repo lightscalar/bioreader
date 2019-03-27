@@ -76,7 +76,7 @@ You can process raw annotation data into a readable CSV file using the
 
 By default, the script will attempt to write the CSV file back to the
 `/Volumes/ANNOTATIONS` USB stick. The annotations CSV file records the board
-id, note content, timestamp, and datetime string.
+id, annotation text, timestamp, and datetime string.
 
 ## Help
 
